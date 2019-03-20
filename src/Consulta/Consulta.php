@@ -1,6 +1,6 @@
 <?php
 
-namespace ConsultaEmpresa\Command;
+namespace ConsultaEmpresa\Consulta;
 
 use Bissolli\ValidadorCpfCnpj\Documento;
 use Goutte\Client;
@@ -15,17 +15,25 @@ class Consulta
     private $client;
     private $output = [];
 
-    public function processaLista()
+    /**
+     * Processa uma lista de CNPJ e retorna todos os dados destes CNPJ
+     *
+     * @param array $list
+     * @throws \Exception
+     * @return array
+     */
+    public function processaLista(array $list): array
     {
         $this->validateCnpj($list);
         if ($this->invalidList) {
             throw new \Exception('Invalid: '.implode(',', $this->invalidList));
         }
-        $this->client = new Client();foreach ($this->validList as $cnpj) {
+        $this->client = new Client();
+        foreach ($this->validList as $cnpj) {
             $empresa = $this->getNomeFantasia($cnpj);
-            $empresa['funcionamento'] = $this->consultaEmpresa($cnpj);
+            $empresa['funcionamento'] = $this->consultaFuncionamento($cnpj);
             foreach ($empresa['funcionamento'] as $key => $processo) {
-                $response = $this->consultaFuncionamento($processo['numeroProcesso']);
+                $response = $this->consultaProcesso($processo['numeroProcesso']);
                 $empresa['funcionamento'][$key] = array_merge(
                     $empresa['funcionamento'][$key],
                     $response
@@ -36,7 +44,14 @@ class Consulta
         return $this->output;
     }
 
-    private function consultaEmpresa($cnpj)
+    /**
+     * Consulta informações de funcionamento da empresa
+     *
+     * @param string $cnpj
+     * @throws \Exception
+     * @return array
+     */
+    private function consultaFuncionamento(string $cnpj): array
     {
         $funcionamento = [];
         $this->client->setHeader('Authorization', 'Guest');
@@ -67,7 +82,14 @@ class Consulta
         return $funcionamento;
     }
 
-    public function getNomeFantasia($cnpj)
+    /**
+     * Consulta o nome fantasia da empresa
+     *
+     * @param string $cnpj
+     * @throws \Exception
+     * @return array
+     */
+    public function getNomeFantasia(string $cnpj): array
     {
         $this->client->setHeader('Authorization', 'Guest');
         $this->client->request('GET', 'https://consultas.anvisa.gov.br/api/empresa/' . $cnpj);
@@ -81,7 +103,13 @@ class Consulta
         return $content;
     }
 
-    private function consultaFuncionamento($processo)
+    /**
+     * Retorna detalhes dos processos da empresa
+     * @param string $processo
+     * @throws \Exception
+     * @return array
+     */
+    private function consultaProcesso(string $processo): array
     {
         $this->client->setHeader('Authorization', 'Guest');
         $this->client->request('GET', 'https://consultas.anvisa.gov.br/api/empresa/funcionamento/' . $processo);
@@ -95,6 +123,13 @@ class Consulta
         return $content;
     }
 
+    /**
+     * Valida CNPJ e atribui a lista de CNPJ válido e inválido para
+     * $this->invalidList e $this->validList
+     *
+     * @param array $lista
+     * @return null
+     */
     private function validateCnpj(array $lista)
     {
         foreach ($lista as $cnpj) {

@@ -18,3 +18,5 @@ vendor
 
 # this is the code coverage generated when running phpunit.
 tests/log
+
+.phplint-cache
