@@ -89,7 +89,7 @@ class Consulta
      * @throws \Exception
      * @return array
      */
-    public function getNomeFantasia(string $cnpj): array
+    private function getNomeFantasia(string $cnpj): array
     {
         $this->client->setHeader('Authorization', 'Guest');
         $this->client->request('GET', 'https://consultas.anvisa.gov.br/api/empresa/' . $cnpj);
