@@ -6,17 +6,13 @@ Consulta empresas na ANVISA utilizando a seguinte URL:
 https://consultas.anvisa.gov.br/#/empresas/empresas/q/?cnpj=<cnpj>
 ```
 
-A execução do projeto com Docker é bem simples:
-
 ```bash
-git clone https://github.com/lyseontech/consulta-empresa
-cd consulta-empresa
-docker-compose up -d
-docker-compose exec php7 bin/consulta-empresa <lista-de-cnpj>
+composer require lyseontech/consulta-empresa-anvisa
 ```
 
-Onde:
+Forma de uso:
 
-| Campo             |  Descrição                         |
-|-------------------|------------------------------------|
-| `<lista-de-cnpj>` | Lista de CNPJ separada por vírgula |
+```php
+$consulta = new Consulta();
+var_dump($consulta->processaLista([12345678901234]));
+```
