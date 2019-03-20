@@ -2,7 +2,7 @@
 	"name" : "lyseontech/consulta-empresa",
 	"description" : "Consulta de empresas no site da Anvisa",
 	"license" : "MIT",
-	"type" : "cli-app",
+	"type" : "package",
 	"homepage" : "https://github.com/lyseontech/consulta-empresa",
 	"authors" : [{
 			"name" : "Vitor Mattos",
@@ -19,13 +19,11 @@
 	],
 	"autoload" : {
 		"psr-4" : {
-			"ConsultaEmpresa\\" : "src/Consulta"
+			"ConsultaEmpresa\\" : "src"
 		}
 	},
 	"require" : {
 		"php" : ">=7",
-		"symfony/console" : "^3.2",
-        "league/climate": "^3.4",
 		"bissolli/validador-cpf-cnpj": "^1.2",
 		"fabpot/goutte": "^3.2"
 	},
@@ -46,8 +44,5 @@
 			"@phpcs",
 			"@phplint"
 		]
-	},
-	"bin" : [
-		"bin/consulta-empesa"
-	]
+	}
 }

@@ -13,10 +13,8 @@ vendor
 ## VI
 *.swp
 
-# storage
-storage
-
 # settings
 .env
 
-*.csv
+# this is the code coverage generated when running phpunit.
+tests/log
