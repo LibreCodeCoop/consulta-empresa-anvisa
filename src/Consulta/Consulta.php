@@ -61,7 +61,7 @@ class Consulta
     private function getClient(): Client
     {
         if (!$this->client) {
-            $this->client = new Client();
+            $this->client = new Client([['verify' => false]]);
         }
         return $this->client;
     }
