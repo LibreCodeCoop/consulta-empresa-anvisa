@@ -4,6 +4,7 @@ namespace ConsultaEmpresa\Consulta;
 
 use Bissolli\ValidadorCpfCnpj\Documento;
 use Goutte\Client;
+use GuzzleHttp\Client as GuzzleClient;
 
 class Consulta
 {
@@ -61,7 +62,8 @@ class Consulta
     private function getClient(): Client
     {
         if (!$this->client) {
-            $this->client = new Client([['verify' => false]]);
+            $this->client = new Client();
+            $this->client->setClient(new GuzzleClient(['allow_redirects' => false, 'cookies' => true, 'verify' => false]));
         }
         return $this->client;
     }
