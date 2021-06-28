@@ -7,7 +7,7 @@ https://consultas.anvisa.gov.br/#/empresas/empresas/q/?cnpj=<cnpj>
 ```
 
 ```bash
-composer require lyseontech/consulta-empresa-anvisa
+composer require librecodecoop/consulta-empresa-anvisa
 ```
 
 Forma de uso:
