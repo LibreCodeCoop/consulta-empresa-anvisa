@@ -1,17 +1,17 @@
 {
-	"name" : "lyseontech/consulta-empresa-anvisa",
+	"name" : "librecodecoop/consulta-empresa-anvisa",
 	"description" : "Consulta de empresas no site da Anvisa",
 	"license" : "MIT",
 	"type" : "package",
-	"homepage" : "https://github.com/lyseontech/consulta-empresa-anvisa",
+	"homepage" : "https://github.com/librecodecoop/consulta-empresa-anvisa",
 	"authors" : [{
 			"name" : "Vitor Mattos",
 			"homepage" : "https://github.com/vitormattos"
 		}
 	],
 	"support" : {
-		"source" : "https://github.com/lyseontech/consulta-empresa-anvisa",
-		"issues" : "https://github.com/lyseontech/consulta-empresa-anvisa/issues"
+		"source" : "https://github.com/librecodecoop/consulta-empresa-anvisa",
+		"issues" : "https://github.com/librecodecoop/consulta-empresa-anvisa/issues"
 	},
 	"keywords" : [
 		"scrapper",
